@@ -8,6 +8,7 @@ namespace SC
     {
         [Min(0), Tooltip("How many times the cat can go to the spirit realm and back. 0 for infinite.")]
         public int Lives = 0;
+        public ControllerType @ControllerType = ControllerType.Keyboard;
 
         private int _maxLives = 0;
         private CatController _player;
@@ -53,11 +54,36 @@ namespace SC
             }
         }
 
+        private void Update()
+        {
+            switch (@ControllerType)
+            {
+                case ControllerType.Keyboard:
+                    HandleKeyboardInput();
+                    break;
+                case ControllerType.XboxOne:
+                    HandleXboxOneInput();
+                    break;
+            }
+        }
+
         private void SubscribeToPlayer()
         {
             _player.OnAlived += Player_OnAlived;
             _player.OnUnalived += Player_OnUnAlived;
         }
+
+        #region Controller Handling
+        private void HandleKeyboardInput()
+        {
+
+        }
+
+        private void HandleXboxOneInput()
+        {
+
+        }
+        #endregion
 
         #region OnAlived
         private void Player_OnAlived(object sender, System.EventArgs e)
@@ -66,7 +92,7 @@ namespace SC
         }
         #endregion
 
-        #region OnDied
+        #region OnUnalived
         private void Player_OnUnAlived(object sender, System.EventArgs e)
         {
             // if MaxLives start at 0 then it can be done infinitely.
