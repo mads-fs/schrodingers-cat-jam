@@ -17,7 +17,7 @@ namespace SC
 
         private void Update()
         {
-            if (_player.transform.position.y > transform.position.y)
+            if (_player.transform.position.y > (transform.position.y - (_player.minGroundNormalY * 0.5f)))
             {
                 _collider.enabled = true;
             }
