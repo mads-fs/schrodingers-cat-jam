@@ -232,24 +232,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &211770795 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3051904093125763965, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
-  m_PrefabInstance: {fileID: 1588942195}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &211770796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211770795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e54f49081dfacf24a929801424768492, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentlySeen: []
 --- !u!1 &723877002
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431efb942d6dccc419a443c330fac7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1083223467
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,10 +699,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1588942197, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
-      propertyPath: VisionManager
-      value: 
-      objectReference: {fileID: 211770796}
     - target: {fileID: 3051904093125763962, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -770,9 +747,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: DerpCat
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1903169191, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
-    - {fileID: 1903169192, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
 --- !u!1 &1908419676
 GameObject:
@@ -896,7 +871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431efb942d6dccc419a443c330fac7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1932814718
 GameObject:
   m_ObjectHideFlags: 0
