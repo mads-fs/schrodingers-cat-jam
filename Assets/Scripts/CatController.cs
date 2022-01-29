@@ -88,7 +88,10 @@ namespace SC
             if (move.x < -0.01f) Renderer.flipX = true;
 
             CatAnimator.SetBool("Grounded", isGrounded);
-            CatAnimator.SetBool("Walking", _velocity.x > 0f || _velocity.x < 0f);
+            if(isGrounded)
+            {
+                CatAnimator.SetBool("Walking", _velocity.x > 0f || _velocity.x < 0f);
+            }
 
             _targetVelocity = move * MaxSpeed;
         }
