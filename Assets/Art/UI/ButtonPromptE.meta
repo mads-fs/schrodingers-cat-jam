@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Art/UI/ButtonPromptE.meta
 guid: 1c3d45f6718fbb24a82cf0e9b9d348eb
 folderAsset: yes
 DefaultImporter:
+=======
+guid: fd4135e2b7feee64c906ed4a60ef0ca0
+PrefabImporter:
+>>>>>>> cc4c7ab149bfe09b745fb2450e68808fdd671536:Assets/Prefabs/OneShotAudio.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

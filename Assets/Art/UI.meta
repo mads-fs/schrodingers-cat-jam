@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Art/UI.meta
 guid: 811933144ee73114e954259a4169f70e
 folderAsset: yes
 DefaultImporter:
+=======
+guid: a368388c5262c1e42946ad03eaa263e8
+PrefabImporter:
+>>>>>>> cc4c7ab149bfe09b745fb2450e68808fdd671536:Assets/Prefabs/Crossfade.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
