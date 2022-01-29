@@ -8,6 +8,8 @@ namespace SC
     [RequireComponent(typeof(Rigidbody2D))]
     public class CatController : MonoBehaviour
     {
+        public event EventHandler OnSproing;
+        public event EventHandler OnPassthru;
         public event EventHandler OnAlived;
         public event EventHandler OnUnalived;
 
@@ -21,15 +23,13 @@ namespace SC
         public float MaxSpeed = 7;
         [Tooltip("How much speed the player has when jumping. Higher number equals higher jump apex.")]
         public float JumpTakeOffSpeed = 7;
-
-        private SpriteRenderer _spriteRenderer;
-        private Animator _animator;
+        public SpriteRenderer Renderer;
+        public Animator CatAnimator;
 
         [Header("Debug - Read Only")]
+        public bool isGrounded;
         [SerializeField]
         private Vector2 _targetVelocity;
-        [SerializeField]
-        private bool _grounded;
         private Vector2 _groundNormal;
         private Rigidbody2D _rBody;
         [SerializeField]
@@ -44,12 +44,6 @@ namespace SC
         private void OnEnable()
         {
             _rBody = GetComponent<Rigidbody2D>();
-        }
-
-        private void Awake()
-        {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            //_animator = GetComponent<Animator>();
         }
 
         private void Start()
@@ -69,9 +63,18 @@ namespace SC
         {
             Vector2 move = Vector2.zero;
             move.x = Input.GetAxis("Horizontal");
-            if (Input.GetButtonDown("Jump") && _grounded)
+            if (Input.GetButtonDown("Jump") && isGrounded)
             {
-                _velocity.y = JumpTakeOffSpeed;
+                if (Input.GetAxis("Vertical") < 0)
+                {
+                    OnPassthru?.Invoke(this, null);
+                    transform.position = new Vector3(transform.position.x, transform.position.y - minGroundNormalY, transform.position.z);
+                }
+                else
+                {
+                    _velocity.y = JumpTakeOffSpeed;
+                    OnSproing?.Invoke(this, null);
+                }
             }
             else if (Input.GetButtonUp("Jump"))
             {
@@ -81,14 +84,11 @@ namespace SC
                 }
             }
 
-            bool flipSprite = (_spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < 0.01f));
-            if(flipSprite)
-            {
-                _spriteRenderer.flipX = !_spriteRenderer.flipX;
-            }
+            if (move.x > 0.01f) Renderer.flipX = false;
+            if (move.x < -0.01f) Renderer.flipX = true;
 
-            //_animator.SetBool("grounded", _grounded);
-            //_animator.SetFloat("velocityX", Mathf.Abs(_velocity.x) / MaxSpeed);
+            CatAnimator.SetBool("Grounded", isGrounded);
+            CatAnimator.SetBool("Walking", _velocity.x > 0f || _velocity.x < 0f);
 
             _targetVelocity = move * MaxSpeed;
         }
@@ -98,7 +98,7 @@ namespace SC
             _velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
             _velocity.x = _targetVelocity.x;
 
-            _grounded = false;
+            isGrounded = false;
             Vector2 deltaPosition = _velocity * Time.deltaTime;
             Vector2 moveAlongGround = new Vector2(_groundNormal.y, -_groundNormal.x);
             Vector2 move = moveAlongGround * deltaPosition.x;
@@ -120,7 +120,7 @@ namespace SC
                     Vector2 currentNormal = _hitBufferList[index].normal;
                     if (currentNormal.y > minGroundNormalY)
                     {
-                        _grounded = true;
+                        isGrounded = true;
                         if (yMovement)
                         {
                             _groundNormal = currentNormal;
