@@ -9,9 +9,11 @@ namespace SC
         [Min(0), Tooltip("How many times the cat can go to the spirit realm and back. 0 for infinite.")]
         public int Lives = 0;
         public ControllerType @ControllerType = ControllerType.Keyboard;
+        public readonly int WorldState = 0;
 
         private int _maxLives = 0;
         private CatController _player;
+        private DialogueManager _dialogueManager;
 
         #region Singleton
         public static GameManager Instance;
@@ -41,7 +43,8 @@ namespace SC
 
         private void Start()
         {
-            _player = FindObjectOfType<CatController>();
+            Instance._player = FindObjectOfType<CatController>();
+            Instance._dialogueManager = FindObjectOfType<DialogueManager>();
             if (!_player)
             {
                 Debug.LogError($"No {typeof(CatController)} found. Abort.");
@@ -49,7 +52,7 @@ namespace SC
             }
             else
             {
-                _maxLives = Lives;
+                Instance._maxLives = Lives;
                 SubscribeToPlayer();
             }
         }
@@ -69,9 +72,18 @@ namespace SC
 
         private void SubscribeToPlayer()
         {
-            _player.OnAlived += Player_OnAlived;
-            _player.OnUnalived += Player_OnUnAlived;
+            Instance._player.OnAlived += Player_OnAlived;
+            Instance._player.OnUnalived += Player_OnUnAlived;
         }
+
+        /// <summary>
+        /// Plays Dialogue using worldstate
+        /// </summary>
+        public void PlayDialogue(GameObject trigger) => _dialogueManager.PlayDialogue(trigger, -1);
+        /// <summary>
+        /// Plays Dialogue using provided state
+        /// </summary>
+        public void PlayDialogue(GameObject trigger, int state) => _dialogueManager.PlayDialogue(trigger, state);
 
         #region Controller Handling
         private void HandleKeyboardInput()
@@ -96,10 +108,10 @@ namespace SC
         private void Player_OnUnAlived(object sender, System.EventArgs e)
         {
             // if MaxLives start at 0 then it can be done infinitely.
-            if (_maxLives != 0)
+            if (Instance._maxLives != 0)
             {
-                Lives -= 1;
-                if (Lives == 0)
+                Instance.Lives -= 1;
+                if (Instance.Lives == 0)
                 {
                     GameOver();
                 }
