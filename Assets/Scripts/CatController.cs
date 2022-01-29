@@ -27,6 +27,7 @@ namespace SC
         public Animator CatAnimator;
 
         [Header("Debug - Read Only")]
+        public bool CanMove = true;
         public bool isGrounded;
         [SerializeField]
         private Vector2 _targetVelocity;
@@ -51,6 +52,14 @@ namespace SC
             _contactFilter.useTriggers = false;
             _contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
             _contactFilter.useLayerMask = true;
+
+            DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+            if (dialogueManager != null)
+            {
+                dialogueManager.OnDialogueStart += DialogueManager_OnDialogueStart;
+                dialogueManager.OnDialogueAdvance += DialogueManager_OnDialogueAdvance;
+                dialogueManager.OnDialogueEnd += DialogueManager_OnDialogueEnd;
+            }
         }
 
         private void Update()
@@ -88,7 +97,7 @@ namespace SC
             if (move.x < -0.01f) Renderer.flipX = true;
 
             CatAnimator.SetBool("Grounded", isGrounded);
-            if(isGrounded)
+            if (isGrounded)
             {
                 CatAnimator.SetBool("Walking", _velocity.x > 0f || _velocity.x < 0f);
             }
@@ -108,6 +117,21 @@ namespace SC
             Movement(move, false);
             move = Vector2.up * deltaPosition.y;
             Movement(move, true);
+        }
+
+        private void DialogueManager_OnDialogueStart(object sender, EventArgs e)
+        {
+            CanMove = false;
+        }
+
+        private void DialogueManager_OnDialogueAdvance(object sender, EventArgs e)
+        {
+            Debug.Log($"{typeof(CatController)}: OnDialogueAdvance");
+        }
+
+        private void DialogueManager_OnDialogueEnd(object sender, EventArgs e)
+        {
+            CanMove = true;
         }
 
         public void Movement(Vector2 move, bool yMovement)
