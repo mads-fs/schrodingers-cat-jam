@@ -32,6 +32,9 @@ namespace SC
             SceneManager.sceneLoaded += SceneManager_sceneLoaded;
             _triggers = new List<GameObject>();
             DialogueParent.SetActive(false);
+            _triggers.Clear();
+            DialogueTrigger[] triggers = FindObjectsOfType<DialogueTrigger>();
+            foreach (DialogueTrigger trigger in triggers) _triggers.Add(trigger.gameObject);
         }
 
         private void Update()

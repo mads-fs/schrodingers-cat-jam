@@ -23,11 +23,15 @@ namespace SC
         public float MaxSpeed = 7;
         [Tooltip("How much speed the player has when jumping. Higher number equals higher jump apex.")]
         public float JumpTakeOffSpeed = 7;
+        [Space(10), Header("Setup")]
         public SpriteRenderer Renderer;
         public Animator CatAnimator;
+        public VisionManager @VisionManager;
+
 
         [Header("Debug - Read Only")]
         public bool CanMove = true;
+        public bool CanInteract = true;
         public bool isGrounded;
         [SerializeField]
         private Vector2 _targetVelocity;
@@ -65,31 +69,65 @@ namespace SC
         private void Update()
         {
             _targetVelocity = Vector2.zero;
+            if (CanInteract == true && Input.GetKeyDown(KeyCode.E)) Interact();
             ComputeVelocity();
+        }
+
+        private void Interact()
+        {
+            if (@VisionManager.CurrentlySeen.Count > 0)
+            {
+                if (@VisionManager.CurrentlySeen.Count == 1)
+                {
+                    @VisionManager.CurrentlySeen[0].GetComponent<Interactable>().OnInteract.Invoke();
+                }
+                else
+                {
+                    GameObject closestObject = null;
+                    float distance = float.MaxValue;
+                    for (int index = 0; index < @VisionManager.CurrentlySeen.Count; index++)
+                    {
+                        float calcDistance = Vector3.Distance(transform.position, @VisionManager.CurrentlySeen[index].transform.position);
+                        if (calcDistance <= distance)
+                        {
+                            distance = calcDistance;
+                            closestObject = @VisionManager.CurrentlySeen[index];
+                        }
+                    }
+                    closestObject.GetComponent<Interactable>().OnInteract.Invoke();
+                }
+            }
+            else
+            {
+                Debug.Log("Nothing to interact with in vision.");
+            }
         }
 
         private void ComputeVelocity()
         {
             Vector2 move = Vector2.zero;
-            move.x = Input.GetAxis("Horizontal");
-            if (Input.GetButtonDown("Jump") && isGrounded)
+            if (CanMove)
             {
-                if (Input.GetAxis("Vertical") < 0)
+                move.x = Input.GetAxis("Horizontal");
+                if (Input.GetButtonDown("Jump") && isGrounded)
                 {
-                    OnPassthru?.Invoke(this, null);
-                    transform.position = new Vector3(transform.position.x, transform.position.y - minGroundNormalY, transform.position.z);
+                    if (Input.GetAxis("Vertical") < 0)
+                    {
+                        OnPassthru?.Invoke(this, null);
+                        transform.position = new Vector3(transform.position.x, transform.position.y - minGroundNormalY, transform.position.z);
+                    }
+                    else
+                    {
+                        _velocity.y = JumpTakeOffSpeed;
+                        OnSproing?.Invoke(this, null);
+                    }
                 }
-                else
+                else if (Input.GetButtonUp("Jump"))
                 {
-                    _velocity.y = JumpTakeOffSpeed;
-                    OnSproing?.Invoke(this, null);
-                }
-            }
-            else if (Input.GetButtonUp("Jump"))
-            {
-                if (_velocity.y > 0)
-                {
-                    _velocity.y *= 0.5f;
+                    if (_velocity.y > 0)
+                    {
+                        _velocity.y *= 0.5f;
+                    }
                 }
             }
 
@@ -122,6 +160,7 @@ namespace SC
         private void DialogueManager_OnDialogueStart(object sender, EventArgs e)
         {
             CanMove = false;
+            CanInteract = false;
         }
 
         private void DialogueManager_OnDialogueAdvance(object sender, EventArgs e)
@@ -132,6 +171,7 @@ namespace SC
         private void DialogueManager_OnDialogueEnd(object sender, EventArgs e)
         {
             CanMove = true;
+            CanInteract = true;
         }
 
         public void Movement(Vector2 move, bool yMovement)
