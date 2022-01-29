@@ -47,7 +47,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -145,22 +145,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpeechBubble_0
+      name: SpeechBubble0
       rect:
         serializedVersion: 2
         x: 1
-        y: 4
+        y: 1
         width: 32
-        height: 37
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5d9fd2f42171e7540800000000000000
-      internalID: 5007465203087833557
+      spriteID: e8fc40ba2a54743c0800000000000000
+      internalID: -4375451948010909810
       vertices: []
       indices: 
       edges: []
