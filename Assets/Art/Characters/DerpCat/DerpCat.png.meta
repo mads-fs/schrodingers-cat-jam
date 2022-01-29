@@ -38,6 +38,18 @@ TextureImporter:
   - first:
       213: -3754393954444390850
     second: DerpCat11
+  - first:
+      213: -938932624890408812
+    second: DerpCat12
+  - first:
+      213: 4191218093730275290
+    second: DerpCat13
+  - first:
+      213: -989197324351571873
+    second: DerpCat14
+  - first:
+      213: -7665631494223739105
+    second: DerpCat15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -410,6 +422,90 @@ TextureImporter:
       bones: []
       spriteID: e3ec77e0796b5ebc0800000000000000
       internalID: -3754393954444390850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DerpCat12
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 490d16990cd38f2f0800000000000000
+      internalID: -938932624890408812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DerpCat13
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adf9bf476a23a2a30800000000000000
+      internalID: 4191218093730275290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DerpCat14
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f58f145464aa542f0800000000000000
+      internalID: -989197324351571873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DerpCat15
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 1
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f174fbf25c43e9590800000000000000
+      internalID: -7665631494223739105
       vertices: []
       indices: 
       edges: []
