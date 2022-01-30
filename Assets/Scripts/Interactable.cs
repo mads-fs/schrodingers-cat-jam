@@ -23,28 +23,30 @@ namespace SC
         private void Start()
         {
             _trigger = GetComponent<BoxCollider2D>();
-            _trigger.isTrigger = true;
         }
 
         public void PushSelf(float force)
         {
-            Rigidbody2D body = gameObject.AddComponent<Rigidbody2D>();
-            CatController player = FindObjectOfType<CatController>();
-            if (player.transform.position.x < transform.position.x)
+            if (GameManager.Instance.WorldState >= RequiredWorldState)
             {
-                // to the right of object
-                body.AddForce(new Vector2(force, force));
-            }
-            else
-            {
-                // to the left of object
-                body.AddForce(new Vector2(-force, force));
+                Rigidbody2D body = gameObject.AddComponent<Rigidbody2D>();
+                CatController player = FindObjectOfType<CatController>();
+                if (player.transform.position.x < transform.position.x)
+                {
+                    // to the right of object
+                    body.AddForce(new Vector2(force, force));
+                }
+                else
+                {
+                    // to the left of object
+                    body.AddForce(new Vector2(-force, force));
+                }
             }
         }
 
         public void TriggerInteract()
         {
-            if(GameManager.Instance.WorldState >= RequiredWorldState)
+            if (GameManager.Instance.WorldState >= RequiredWorldState)
             {
                 if (SingleUse == true)
                 {

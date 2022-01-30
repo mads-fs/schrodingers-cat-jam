@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace SC
 {
@@ -30,6 +31,10 @@ namespace SC
         public GameObject PushThingOffTableAudioPrefab;
         public GameObject RipCurtainsAudioPrefab;
         public GameObject WindowOpenAudioPrefab;
+        public GameObject LadyBugEatingAudioPrefab;
+        public GameObject LadyBugBurpAudioPrefab;
+        public GameObject OpenVentAudioPrefab;
+        public GameObject CloseVentAudioPrefab;
         [Header("Spirit Realm")]
         public GameObject SpiritCat;
         [Header("Side Window")]
@@ -40,6 +45,12 @@ namespace SC
         public SpriteRenderer BackWindowRenderer;
         public Sprite OpenWindowSprite;
         public GameObject LadyBugObject;
+        [Header("Plant")]
+        public GameObject PlantObject;
+        public SpriteRenderer PlantRenderer;
+        public Sprite EatenPlantSprite;
+        [Header("End Game")]
+        public Image FadeToBlackImage;
 
         private int _maxLives = 0;
         private CatController _player;
@@ -54,7 +65,6 @@ namespace SC
         private Vector3 _camBoxPosition;
 
         private Coroutine _cameraMoveHandle;
-        private bool _playerIsTransitioning = false;
         private List<Interactable> _interactables;
 
         #region Singleton
@@ -149,23 +159,135 @@ namespace SC
             }
         }
 
+        public void EndGame()
+        {
+            StartCoroutine(DoFadeToBlack());
+        }
+
+        private IEnumerator DoFadeToBlack()
+        {
+            float time = 0f;
+            float lerpTime = 1f;
+
+            _player.CanMove = false;
+            _player.CanInteract = false;
+
+            while(time < lerpTime)
+            {
+                time += Time.deltaTime;
+                float alpha = time / lerpTime;
+                FadeToBlackImage.color = Color.Lerp(Color.white, Color.black, alpha);
+                yield return null;
+            }
+            Instantiate(OpenVentAudioPrefab, Vector3.zero, Quaternion.identity);
+            yield return new WaitForSeconds(OpenVentAudioPrefab.GetComponent<OneShotAudio>().Clip.length);
+            Instantiate(CloseVentAudioPrefab, Vector3.zero, Quaternion.identity);
+            yield return new WaitForSeconds(CloseVentAudioPrefab.GetComponent<OneShotAudio>().Clip.length);
+            SceneManager.LoadScene(0);
+            Destroy(gameObject);
+        }
+
+        #region Open Window Sequence
         public void OpenWindow()
         {
             BackWindowRenderer.sprite = OpenWindowSprite;
             PlayOpenWindow();
+            _player.CanInteract = false;
+            _player.CanMove = false;
             StartCoroutine(DoOpenWindowSequence());
         }
 
         private IEnumerator DoOpenWindowSequence()
         {
-
-            yield return null;
+            float sequenceFOV = 22;
+            Vector3 sequencePos = new Vector3(2.47f, 2.5f, -15f);
+            float lerpTime = 2f;
+            float time = 0f;
+            while (time < lerpTime)
+            {
+                time += Time.deltaTime;
+                float alpha = time / lerpTime;
+                Instance._cam.fieldOfView = Mathf.Lerp(Instance._camDefaultFOV, sequenceFOV, alpha);
+                Instance._cam.transform.position = Vector3.Lerp(Instance._camDefaultPosition, sequencePos, alpha);
+                yield return null;
+            }
+            Instance._cam.fieldOfView = sequenceFOV;
+            Instance._cam.transform.position = sequencePos;
+            lerpTime = 0.5f;
+            time = 0f;
+            Quaternion ladyRot = LadyBugObject.transform.rotation;
+            Quaternion ladyNewRot = Quaternion.Euler(0, 0, 90f);
+            while (time < lerpTime)
+            {
+                time += Time.deltaTime;
+                float alpha = time / lerpTime;
+                LadyBugObject.transform.rotation = Quaternion.Lerp(ladyRot, ladyNewRot, alpha);
+                yield return null;
+            }
+            Vector3 currentLadyBugPos = LadyBugObject.transform.position;
+            Vector3 currentLadyBugScale = LadyBugObject.transform.localScale;
+            Vector3 newLadyBugScale = new Vector3(0.25f, 0.25f, 0);
+            sequencePos = new Vector3(2.332f, 2.415f, 0);
+            ladyRot = LadyBugObject.transform.rotation;
+            ladyNewRot = Quaternion.Euler(70f, 0, 90f);
+            lerpTime = 1f;
+            time = 0f;
+            while(time < lerpTime)
+            {
+                time += Time.deltaTime;
+                float alpha = time / lerpTime;
+                LadyBugObject.transform.position = Vector3.Lerp(currentLadyBugPos, sequencePos, alpha);
+                LadyBugObject.transform.rotation = Quaternion.Lerp(ladyRot, ladyNewRot, alpha);
+                LadyBugObject.transform.localScale = Vector3.Lerp(currentLadyBugScale, newLadyBugScale, alpha);
+                yield return null;
+            }
+            lerpTime = 1.5f;
+            time = 0f;
+            LadyBugObject.GetComponent<SpriteRenderer>().color = Color.white;
+            currentLadyBugPos = LadyBugObject.transform.position;
+            sequencePos = new Vector3(6.332f, 4.664f, 0);
+            LadyBugObject.transform.rotation = Quaternion.Euler(70f, 0, 270f);
+            ladyRot = LadyBugObject.transform.rotation;
+            ladyNewRot = Quaternion.Euler(0f, 0f, 270f);
+            while (time < lerpTime)
+            {
+                time += Time.deltaTime;
+                float alpha = time / lerpTime;
+                LadyBugObject.transform.rotation = Quaternion.Lerp(ladyRot, ladyNewRot, alpha);
+                LadyBugObject.transform.position = Vector3.Lerp(currentLadyBugPos, sequencePos, alpha);
+                yield return null;
+            }
+            time = 0f;
+            lerpTime = LadyBugEatingAudioPrefab.GetComponent<OneShotAudio>().Clip.length + 0.05f;
+            currentLadyBugPos = new Vector3(6.331f, 4.664f, 0);
+            sequencePos = new Vector3(6.934f, 4.664f, 0);
+            PlayEatPlant();
+            while(time < lerpTime)
+            {
+                time += Time.deltaTime;
+                float alpha = time / lerpTime;
+                LadyBugObject.transform.position = Vector3.Lerp(currentLadyBugPos, sequencePos, alpha);
+                yield return null;
+            }
+            PlantRenderer.sprite = EatenPlantSprite;
+            BoxCollider2D collider = PlantObject.GetComponent<BoxCollider2D>();
+            collider.offset = new Vector2(0, -0.97f);
+            collider.size = new Vector2(2.29f, 2.02f);
+            PlayBurp();
+            yield return new WaitForSeconds(LadyBugBurpAudioPrefab.GetComponent<OneShotAudio>().Clip.length + 0.05f);
+            LadyBugObject.SetActive(false);
+            MoveCameraToDefault();
+            _player.CanMove = true;
+            _player.CanInteract = true;
         }
+        #endregion
 
         #region OneShotAudio
         public void PlayTeddybearFalling() => Instantiate(TeddybearHitsGroundAudioPrefab, Vector3.zero, Quaternion.identity);
         public void PlayPushThingOffTable() => Instantiate(PushThingOffTableAudioPrefab, Vector3.zero, Quaternion.identity);
         public void PlayOpenWindow() => Instantiate(WindowOpenAudioPrefab, Vector3.zero, Quaternion.identity);
+        public void PlayEatPlant() => Instantiate(LadyBugEatingAudioPrefab, Vector3.zero, Quaternion.identity);
+        public void PlayBurp() => Instantiate(LadyBugBurpAudioPrefab, Vector3.zero, Quaternion.identity);
         #endregion
 
         #region Move Camera
@@ -284,7 +406,6 @@ namespace SC
                 yield return null;
             }
             _player.gameObject.SetActive(true);
-            _playerIsTransitioning = false;
             _player.CanMove = true;
             _player.CanInteract = true;
         }
@@ -319,7 +440,6 @@ namespace SC
         {
             _player.CanMove = false;
             _player.CanInteract = false;
-            _playerIsTransitioning = true;
             StartCoroutine(DoSpiritTransition());
         }
 
@@ -367,7 +487,6 @@ namespace SC
                 yield return null;
             }
             _player.gameObject.SetActive(true);
-            _playerIsTransitioning = false;
             _player.CanMove = true;
             _player.CanInteract = true;
         }

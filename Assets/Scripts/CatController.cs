@@ -98,7 +98,7 @@ namespace SC
             {
                 if (@VisionManager.CurrentlySeen.Count == 1)
                 {
-                    @VisionManager.CurrentlySeen[0].GetComponent<Interactable>().OnInteract.Invoke();
+                    @VisionManager.CurrentlySeen[0].GetComponent<Interactable>().TriggerInteract();
                 }
                 else
                 {
@@ -113,7 +113,7 @@ namespace SC
                             closestObject = @VisionManager.CurrentlySeen[index];
                         }
                     }
-                    closestObject.GetComponent<Interactable>().OnInteract.Invoke();
+                    closestObject.GetComponent<Interactable>().TriggerInteract();
                 }
             }
             else

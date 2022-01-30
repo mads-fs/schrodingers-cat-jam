@@ -245,7 +245,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.32, y: 0}
@@ -335,6 +335,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1982134677, guid: c2c7c3f0d43176044a7dbb59cde5db33, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1158247305}
     - target: {fileID: 3188677182671260882, guid: c2c7c3f0d43176044a7dbb59cde5db33, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -722,9 +726,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877600407}
-  m_LocalRotation: {x: -0, y: -0, z: 0.000000119209275, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.4313302, y: 2.416, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18
@@ -813,7 +817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8195467191236248265, guid: 2a62a168b882e7948b68eee20c768db0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.235466
+      value: 4.764534
       objectReference: {fileID: 0}
     - target: {fileID: 8195467191236248265, guid: 2a62a168b882e7948b68eee20c768db0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -985,21 +989,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1407931081}
     - target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
-      propertyPath: OpenWindow
+      propertyPath: PlantObject
       value: 
-      objectReference: {fileID: 3101256104984370139, guid: fb12533c0a3eb0e4aa39e938e0191469, type: 3}
+      objectReference: {fileID: 1517750907}
     - target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
       propertyPath: GlobalVolume
       value: 
       objectReference: {fileID: 720926380}
     - target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
+      propertyPath: LadyBugObject
+      value: 
+      objectReference: {fileID: 877600407}
+    - target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
+      propertyPath: PlantRenderer
+      value: 
+      objectReference: {fileID: 1517750908}
+    - target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
       propertyPath: SideWindowLight
       value: 
       objectReference: {fileID: 1477566515}
-    - target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
-      propertyPath: OpenWindowSprite
-      value: 
-      objectReference: {fileID: 3101256104984370139, guid: fb12533c0a3eb0e4aa39e938e0191469, type: 3}
     - target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
       propertyPath: SideWindowDrapes
       value: 
@@ -1008,10 +1016,6 @@ PrefabInstance:
       propertyPath: BackWindowRenderer
       value: 
       objectReference: {fileID: 1441774403}
-    - target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
-      propertyPath: WindowOpenAudioPrefab
-      value: 
-      objectReference: {fileID: 7512624015160932820, guid: afab1ae82136aca43b20744309672f07, type: 3}
     - target: {fileID: 1254432867506354223, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -1133,7 +1137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0abaa196f40c7b4bbc77237c9c1dcf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RequiredWorldState: 2
+  RequiredWorldState: 4
   SingleUse: 1
   ListenForHitFloor: 0
   OnInteract:
@@ -1164,11 +1168,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3051904093125763962, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.97
+      value: -9.98
       objectReference: {fileID: 0}
     - target: {fileID: 3051904093125763962, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.94
+      value: -0.33
       objectReference: {fileID: 0}
     - target: {fileID: 3051904093125763962, guid: fefff1e9a896b7749874d021430a67a3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1337,7 +1341,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1165816649824162033, guid: 20a9f3a27362c9948971137f740efdc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -28,7 +28,7 @@ namespace SC
                 foreach (Collider2D collider in hits)
                 {
                     Interactable interactable = collider.gameObject.GetComponent<Interactable>();
-                    if (interactable) CurrentlySeen.Add(interactable.gameObject);
+                    if (interactable && GameManager.Instance.WorldState >= interactable.RequiredWorldState) CurrentlySeen.Add(interactable.gameObject);
                 }
             }
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d0ec182e74ca44ca91a8b31d7c856f, type: 3}
   m_Name: Chain3
   m_EditorClassIdentifier: 
-  NewWorldState: 2
+  NewWorldState: 4
   DialogueList:
   - {fileID: 11400000, guid: 0c2dccb90561723419c6489b20a01400, type: 2}
   - {fileID: 11400000, guid: df2a0c0df080e354a86866eee6e33cfd, type: 2}
