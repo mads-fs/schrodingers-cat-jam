@@ -29,12 +29,17 @@ namespace SC
         public GameObject TeddybearHitsGroundAudioPrefab;
         public GameObject PushThingOffTableAudioPrefab;
         public GameObject RipCurtainsAudioPrefab;
+        public GameObject WindowOpenAudioPrefab;
         [Header("Spirit Realm")]
         public GameObject SpiritCat;
         [Header("Side Window")]
         public SpriteRenderer SideWindowDrapes;
         public Sprite RippedCurtains;
         public GameObject SideWindowLight;
+        [Header("Back Window")]
+        public SpriteRenderer BackWindowRenderer;
+        public Sprite OpenWindowSprite;
+        public GameObject LadyBugObject;
 
         private int _maxLives = 0;
         private CatController _player;
@@ -144,9 +149,23 @@ namespace SC
             }
         }
 
+        public void OpenWindow()
+        {
+            BackWindowRenderer.sprite = OpenWindowSprite;
+            PlayOpenWindow();
+            StartCoroutine(DoOpenWindowSequence());
+        }
+
+        private IEnumerator DoOpenWindowSequence()
+        {
+
+            yield return null;
+        }
+
         #region OneShotAudio
         public void PlayTeddybearFalling() => Instantiate(TeddybearHitsGroundAudioPrefab, Vector3.zero, Quaternion.identity);
         public void PlayPushThingOffTable() => Instantiate(PushThingOffTableAudioPrefab, Vector3.zero, Quaternion.identity);
+        public void PlayOpenWindow() => Instantiate(WindowOpenAudioPrefab, Vector3.zero, Quaternion.identity);
         #endregion
 
         #region Move Camera
