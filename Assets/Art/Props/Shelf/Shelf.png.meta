@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a8a1ff89cb97aef4688ff4ddcb411bcb
+guid: a94c9b05ccef70546b5444c266a903d5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2005341548198947758
-    second: CatBridge0
+      213: 7471158053700013106
+    second: Shelf0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,12 +130,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CatBridge0
+      name: Shelf0
       rect:
         serializedVersion: 2
         x: 1
         y: 1
-        width: 96
+        width: 64
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -144,8 +144,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eabeab9638764db10800000000000000
-      internalID: 2005341548198947758
+      spriteID: 23c869b7aa2eea760800000000000000
+      internalID: 7471158053700013106
       vertices: []
       indices: 
       edges: []
