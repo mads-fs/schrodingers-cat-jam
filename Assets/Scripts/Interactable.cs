@@ -13,10 +13,12 @@ namespace SC
     {
         public event EventHandler OnHitFloor;
 
+        public int RequiredWorldState = 0;
         public bool SingleUse = false;
         public bool ListenForHitFloor = false;
         public UnityEvent OnInteract;
         private BoxCollider2D _trigger;
+        private bool _hasBeenUsed;
 
         private void Start()
         {
@@ -40,14 +42,23 @@ namespace SC
             }
         }
 
-        public void ShowPrompt()
+        public void TriggerInteract()
         {
-
-        }
-
-        public void HidePrompt()
-        {
-
+            if(GameManager.Instance.WorldState >= RequiredWorldState)
+            {
+                if (SingleUse == true)
+                {
+                    if (_hasBeenUsed == false)
+                    {
+                        _hasBeenUsed = true;
+                        OnInteract?.Invoke();
+                    }
+                }
+                else
+                {
+                    OnInteract?.Invoke();
+                }
+            }
         }
 
         public void OnTriggerEnter2D(Collider2D collision)

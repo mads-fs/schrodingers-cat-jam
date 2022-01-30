@@ -3215,7 +3215,11 @@ MonoBehaviour:
   TransitionAudioPrefabReverse: {fileID: 7512624015160932820, guid: dda4f1eecc5f4f141b6bd995cd5a5d98, type: 3}
   TeddybearHitsGroundAudioPrefab: {fileID: 7512624015160932820, guid: 583eda95429a85d4eb7d620512125d44, type: 3}
   PushThingOffTableAudioPrefab: {fileID: 7512624015160932820, guid: 2f5d9708b1dcd504da5f7a974fee5355, type: 3}
+  RipCurtainsAudioPrefab: {fileID: 7512624015160932820, guid: 75b0bc7cf2bc9e244a21060867c15614, type: 3}
   SpiritCat: {fileID: 0}
+  SideWindowDrapes: {fileID: 0}
+  RippedCurtains: {fileID: -276827614358758444, guid: 497c65d8a0e3d5f4d8c71d1c692c960f, type: 3}
+  SideWindowLight: {fileID: 0}
 --- !u!1001 &5071308091727455582
 PrefabInstance:
   m_ObjectHideFlags: 0

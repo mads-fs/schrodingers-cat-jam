@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
@@ -27,8 +28,13 @@ namespace SC
         public GameObject TransitionAudioPrefabReverse;
         public GameObject TeddybearHitsGroundAudioPrefab;
         public GameObject PushThingOffTableAudioPrefab;
+        public GameObject RipCurtainsAudioPrefab;
         [Header("Spirit Realm")]
         public GameObject SpiritCat;
+        [Header("Side Window")]
+        public SpriteRenderer SideWindowDrapes;
+        public Sprite RippedCurtains;
+        public GameObject SideWindowLight;
 
         private int _maxLives = 0;
         private CatController _player;
@@ -120,6 +126,13 @@ namespace SC
         public void AdvanceWorldState() => Instance.WorldState += 1;
 
         public void LoadScene(int index) => SceneManager.LoadScene(index);
+
+        public void ChangeDrapes()
+        {
+            SideWindowDrapes.sprite = RippedCurtains;
+            Instantiate(RipCurtainsAudioPrefab, Vector3.zero, Quaternion.identity);
+            SideWindowLight.SetActive(true);
+        }
 
         #region OneShotAudio
         public void PlayTeddybearFalling() => Instantiate(TeddybearHitsGroundAudioPrefab, Vector3.zero, Quaternion.identity);
