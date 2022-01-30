@@ -28,6 +28,7 @@ namespace SC
         public Animator CatAnimator;
         public VisionManager @VisionManager;
         public AnimationBroadcaster AnimationEventListener;
+        public GameObject JumpAudioPrefab;
 
 
         [Header("Debug - Read Only")]
@@ -126,6 +127,7 @@ namespace SC
                     {
                         _velocity.y = JumpTakeOffSpeed;
                         OnSproing?.Invoke(this, null);
+                        Instantiate(JumpAudioPrefab, Vector2.zero, Quaternion.identity);
                     }
                 }
                 else if (Input.GetButtonUp("Jump"))

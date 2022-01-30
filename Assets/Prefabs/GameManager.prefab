@@ -3213,6 +3213,8 @@ MonoBehaviour:
   MainMixer: {fileID: 24100000, guid: f4e2bed175c83f6419c8fcea2dbfc708, type: 2}
   TransitionAudioPrefab: {fileID: 7512624015160932820, guid: c619932b66a2bd341a8c48aa32d70803, type: 3}
   TransitionAudioPrefabReverse: {fileID: 7512624015160932820, guid: dda4f1eecc5f4f141b6bd995cd5a5d98, type: 3}
+  TeddybearHitsGroundAudioPrefab: {fileID: 7512624015160932820, guid: 583eda95429a85d4eb7d620512125d44, type: 3}
+  PushThingOffTableAudioPrefab: {fileID: 7512624015160932820, guid: 2f5d9708b1dcd504da5f7a974fee5355, type: 3}
   SpiritCat: {fileID: 0}
 --- !u!1001 &5071308091727455582
 PrefabInstance:

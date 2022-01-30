@@ -217,6 +217,7 @@ MonoBehaviour:
   CatAnimator: {fileID: 3051904093039002258}
   VisionManager: {fileID: 211770796}
   AnimationEventListener: {fileID: 1187365338}
+  JumpAudioPrefab: {fileID: 7512624015160932820, guid: 83630ae53b2dafc418fa002947978946, type: 3}
   CanMove: 1
   CanInteract: 1
   isGrounded: 0

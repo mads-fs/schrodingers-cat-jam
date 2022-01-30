@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 namespace SC
 {
@@ -24,6 +25,8 @@ namespace SC
         public AudioMixer MainMixer;
         public GameObject TransitionAudioPrefab;
         public GameObject TransitionAudioPrefabReverse;
+        public GameObject TeddybearHitsGroundAudioPrefab;
+        public GameObject PushThingOffTableAudioPrefab;
         [Header("Spirit Realm")]
         public GameObject SpiritCat;
 
@@ -116,6 +119,14 @@ namespace SC
 
         public void AdvanceWorldState() => Instance.WorldState += 1;
 
+        public void LoadScene(int index) => SceneManager.LoadScene(index);
+
+        #region OneShotAudio
+        public void PlayTeddybearFalling() => Instantiate(TeddybearHitsGroundAudioPrefab, Vector3.zero, Quaternion.identity);
+        public void PlayPushThingOffTable() => Instantiate(PushThingOffTableAudioPrefab, Vector3.zero, Quaternion.identity);
+        #endregion
+
+        #region Move Camera
         public void MoveCameraToDefault()
         {
             if (Instance._cam.transform.position != _camDefaultPosition)
@@ -161,7 +172,9 @@ namespace SC
             Instance._cam.transform.position = endPos;
             Instance._cam.fieldOfView = endFOV;
         }
+        #endregion
 
+        #region Dialogue
         /// <summary>
         /// Plays Dialogue using worldstate
         /// </summary>
@@ -170,6 +183,7 @@ namespace SC
         /// Plays Dialogue using provided state
         /// </summary>
         public void PlayDialogue(GameObject trigger, int state) => _dialogueManager.PlayDialogue(trigger, state);
+        #endregion
 
         #region OnAlived
         private void Player_OnAlived(object sender, System.EventArgs e)
@@ -294,7 +308,7 @@ namespace SC
             startFOV = endFOV;
             endFOV = Instance._camDefaultFOV;
             time = 0f;
-            
+
             crossFade.Play();
             crossFade.Fade();
             ShowSpiritRealm();
