@@ -37,6 +37,11 @@ namespace SC
             SFXSlider.value = PlayerPrefs.GetFloat(_sfxVolumeKey);
             MusicSlider.value = PlayerPrefs.GetFloat(_musicVolumeKey);
 
+            SetAudioLevel("Master", MasterSlider.value);
+            SetAudioLevel("SFX", SFXSlider.value);
+            SetAudioLevel("Music", MusicSlider.value);
+            SetAudioLevel("MusicSpirit", MusicSlider.value);
+
             MasterSlider.onValueChanged.AddListener(newVal =>
             {
                 PlayerPrefs.SetFloat(_masterVolumeKey, newVal);
