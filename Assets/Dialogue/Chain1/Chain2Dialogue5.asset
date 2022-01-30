@@ -10,6 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac78960e86f91dd4ea875eb2597fdc30, type: 3}
-  m_Name: Chain1Dialogue2
+  m_Name: Chain2Dialogue5
   m_EditorClassIdentifier: 
-  Content: You wish to leave this space and explore the grand expanse of Outside.
+  Content: You will find aid on the other side of The Portal where you gaze at Outside.
+    Here, this will help you open the Portal.

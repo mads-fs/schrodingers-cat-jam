@@ -16,21 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6aceb7ed29c19544ab0498d2b3ec3538, type: 2}
   - {fileID: 11400000, guid: 1a7e5d5ceb781ab41a2d3f4d8992784c, type: 2}
   - {fileID: 11400000, guid: 0ea12a8698943474a83d2496ef3dea28, type: 2}
-  OnChainStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnChainEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
-        m_TargetAssemblyTypeName: SC.GameManager, Assembly-CSharp
-        m_MethodName: MoveCameraToDefault
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  - {fileID: 11400000, guid: 742b780fb1c5acb46a50f491616498ba, type: 2}
+  - {fileID: 11400000, guid: 526117d4ec77bda4887a88670079ad9d, type: 2}
+  - {fileID: 11400000, guid: def7d2b48aaf5af46996ceac52f61ed3, type: 2}
+  - {fileID: 11400000, guid: 5368bcb0d53f4c446a00196ed876c14e, type: 2}

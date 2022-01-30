@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac78960e86f91dd4ea875eb2597fdc30, type: 3}
   m_Name: Chain1Dialogue1
   m_EditorClassIdentifier: 
-  Content: Hello yes, I am spirit cat.
-  OnPlayDialogue:
-    m_PersistentCalls:
-      m_Calls: []
+  Content: I see that you have come seeking my council.
