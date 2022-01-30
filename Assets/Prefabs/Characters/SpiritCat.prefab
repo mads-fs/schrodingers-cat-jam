@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0abaa196f40c7b4bbc77237c9c1dcf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RequiredWorldState: 0
   SingleUse: 0
   ListenForHitFloor: 0
   OnInteract:
@@ -167,7 +168,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: f1ceefaee0d625848a558681aafa2bfb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
