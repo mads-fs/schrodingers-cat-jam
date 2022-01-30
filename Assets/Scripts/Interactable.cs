@@ -40,6 +40,16 @@ namespace SC
             }
         }
 
+        public void ShowPrompt()
+        {
+
+        }
+
+        public void HidePrompt()
+        {
+
+        }
+
         public void OnTriggerEnter2D(Collider2D collision)
         {
             if (ListenForHitFloor == true)

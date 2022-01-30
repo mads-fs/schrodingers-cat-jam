@@ -27,6 +27,7 @@ namespace SC
         public SpriteRenderer Renderer;
         public Animator CatAnimator;
         public VisionManager @VisionManager;
+        public AnimationBroadcaster AnimationEventListener;
 
 
         [Header("Debug - Read Only")]
@@ -45,6 +46,7 @@ namespace SC
 
         private const float _minMoveDistance = 0.001f;
         private const float _shellRadius = 0.01f;
+        private bool _isAlive = true;
 
         private void OnEnable()
         {
@@ -64,17 +66,21 @@ namespace SC
                 dialogueManager.OnDialogueAdvance += DialogueManager_OnDialogueAdvance;
                 dialogueManager.OnDialogueEnd += DialogueManager_OnDialogueEnd;
             }
+            AnimationEventListener.OnBroadcastEvent += AnimationEventListener_OnBroadcastEvent;
         }
 
         private void Update()
         {
             _targetVelocity = Vector2.zero;
-            if (CanInteract == true && Input.GetKeyDown(KeyCode.E)) Interact();
+            if (CanInteract == true && isGrounded == true && Input.GetKeyDown(KeyCode.E)) Interact();
             ComputeVelocity();
         }
 
         private void Interact()
         {
+            CatAnimator.SetTrigger("Swipe");
+            CanMove = false;
+            CanInteract = false;
             if (@VisionManager.CurrentlySeen.Count > 0)
             {
                 if (@VisionManager.CurrentlySeen.Count == 1)
@@ -174,6 +180,15 @@ namespace SC
             CanInteract = true;
         }
 
+        private void AnimationEventListener_OnBroadcastEvent(object sender, string e)
+        {
+            if(FindObjectOfType<DialogueManager>().IsPlayingDialogue == false)
+            {
+                CanMove = true;
+                CanInteract = true;
+            }
+        }
+
         public void Movement(Vector2 move, bool yMovement)
         {
             float distance = move.magnitude;
@@ -209,6 +224,18 @@ namespace SC
             _rBody.position = _rBody.position + move.normalized * distance;
         }
 
+        public void Transition()
+        {
+            _isAlive = !_isAlive;
+            if (_isAlive)
+            {
+                EmitLeaveSpiritRealm();
+            }
+            else
+            {
+                EmitEnterSpiritRealm();
+            }
+        }
         private void EmitLeaveSpiritRealm() => OnAlived?.Invoke(this, null);
         private void EmitEnterSpiritRealm() => OnUnalived?.Invoke(this, null);
     }

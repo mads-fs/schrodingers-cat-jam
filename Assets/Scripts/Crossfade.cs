@@ -49,6 +49,8 @@ namespace JGDT.Audio.Crossfade
         /// </summary>
         private Queue<float> _queue;
 
+        private string _activeSource = "SourceA";
+
         private void Start()
         {
             if (SourceA == null || SourceB == null)
@@ -81,6 +83,17 @@ namespace JGDT.Audio.Crossfade
         }
 
         #region Public Methods
+        public void Pause()
+        {
+            SourceA.Pause(); 
+            SourceB.Pause();
+        }
+
+        public void Play()
+        {
+            SourceA.Play();
+            SourceB.Play();
+        }
         /// <summary>
         /// Will pause fading whehter it's currently running or not. Will not pause audio.
         /// </summary>
@@ -140,8 +153,9 @@ namespace JGDT.Audio.Crossfade
             float fadeInTime = 0f;
             float fadeOutTime = fadeTime;
 
-            AudioSource active = (SourceA.isPlaying == true ? SourceA : SourceB);
-            AudioSource inactive = (active == SourceA ? SourceB : SourceA);
+            AudioSource active = (_activeSource == "SourceA" ? SourceA : SourceB);
+            AudioSource inactive = (_activeSource == "SourceA" ? SourceB : SourceA);
+            _activeSource = (_activeSource == "SourceA" ? "SourceB" : "SourceA");
             float activeVolumeStart = active.volume;
             float inactiveVolumeStart = inactive.volume;
             inactive.time = active.time;

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d0ec182e74ca44ca91a8b31d7c856f, type: 3}
+  m_Name: Chain1
+  m_EditorClassIdentifier: 
+  DialogueList:
+  - {fileID: 11400000, guid: 6aceb7ed29c19544ab0498d2b3ec3538, type: 2}
+  - {fileID: 11400000, guid: 1a7e5d5ceb781ab41a2d3f4d8992784c, type: 2}
+  - {fileID: 11400000, guid: 0ea12a8698943474a83d2496ef3dea28, type: 2}
+  OnChainStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnChainEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1254432867506354222, guid: a1647f2a050caef4db769e614cd5fbe7, type: 3}
+        m_TargetAssemblyTypeName: SC.GameManager, Assembly-CSharp
+        m_MethodName: MoveCameraToDefault
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

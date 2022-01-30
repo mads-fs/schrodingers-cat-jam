@@ -130,8 +130,8 @@ namespace SC
         public void StopDialogue()
         {
             IsPlayingDialogue = false;
-            DialogueParent.SetActive(false);
             OnDialogueEnd?.Invoke(this, null);
+            DialogueParent.SetActive(false);
         }
     }
 }
