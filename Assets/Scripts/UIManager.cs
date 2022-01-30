@@ -12,8 +12,10 @@ namespace SC
     {
         public GameObject UIParent;
         [Header("Audio")]
-        public float LowestVolume = -67;
-        public float HighestVolume = 0.25f;
+        public float LowestVolume = -50;
+        public float HighestVolume = 0f;
+        public float HighestSFXVolume = 5f;
+        public float HighestMusicVolume = -10f;
         [Header("Sliders")]
         public Slider MasterSlider;
         public Slider SFXSlider;
@@ -38,9 +40,9 @@ namespace SC
             MusicSlider.value = PlayerPrefs.GetFloat(_musicVolumeKey);
 
             SetAudioLevel("Master", MasterSlider.value);
-            SetAudioLevel("SFX", SFXSlider.value);
-            SetAudioLevel("Music", MusicSlider.value);
-            SetAudioLevel("MusicSpirit", MusicSlider.value);
+            SetAudioLevel("SFX", SFXSlider.value, LowestVolume, HighestSFXVolume);
+            SetAudioLevel("Music", MusicSlider.value, LowestVolume, HighestMusicVolume);
+            SetAudioLevel("MusicSpirit", MusicSlider.value, LowestVolume, HighestMusicVolume);
 
             MasterSlider.onValueChanged.AddListener(newVal =>
             {
@@ -51,14 +53,14 @@ namespace SC
             SFXSlider.onValueChanged.AddListener(newVal =>
             {
                 PlayerPrefs.SetFloat(_sfxVolumeKey, newVal);
-                SetAudioLevel("SFX", newVal);
+                SetAudioLevel("SFX", newVal, LowestVolume, HighestSFXVolume);
             });
 
             MusicSlider.onValueChanged.AddListener(newVal =>
             {
                 PlayerPrefs.SetFloat(_musicVolumeKey, newVal);
-                SetAudioLevel("Music", newVal);
-                SetAudioLevel("MusicSpirit", newVal);
+                SetAudioLevel("Music", newVal, LowestVolume, HighestMusicVolume);
+                SetAudioLevel("MusicSpirit", newVal, LowestVolume, HighestMusicVolume);
             });
         }
 
@@ -86,9 +88,11 @@ namespace SC
 
         public void Exit() => Application.Quit();
 
-        private void SetAudioLevel(string mixerGroupName, float newValue)
+        private void SetAudioLevel(string mixerGroupName, float newValue, float overrideLowest = float.MinValue, float overrideHighest = float.MaxValue)
         {
-            float adjustedScale = MapValueToNewScale(newValue, 0f, 1f, LowestVolume, HighestVolume);
+            float lowest = (overrideLowest == float.MinValue ? LowestVolume : overrideLowest);
+            float highest = (overrideHighest == float.MaxValue ? HighestVolume : overrideHighest);
+            float adjustedScale = MapValueToNewScale(newValue, 0f, 1f, lowest, highest);
             GameManager.Instance.MainMixer.SetFloat(mixerGroupName, adjustedScale);
         }
 

@@ -3034,7 +3034,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIParent: {fileID: 1121852622}
   LowestVolume: -50
-  HighestVolume: 0.5
+  HighestVolume: 0
+  HighestSFXVolume: 5
+  HighestMusicVolume: -10
   MasterSlider: {fileID: 755541232}
   SFXSlider: {fileID: 1210631887}
   MusicSlider: {fileID: 979888965}

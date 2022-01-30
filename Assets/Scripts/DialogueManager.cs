@@ -63,7 +63,7 @@ namespace SC
                 if (chain != null)
                 {
                     _currentChain = chain;
-                    StartDialogue();
+                    StartDialogue(chain.NewWorldState);
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace SC
         {
             if (_currentChain != null)
             {
-                StartDialogue();
+                StartDialogue(-1);
             }
             else
             {
@@ -93,7 +93,7 @@ namespace SC
             if (TestChain != null)
             {
                 _currentChain = TestChain;
-                StartDialogue();
+                StartDialogue(-1);
             }
             else
             {
@@ -102,13 +102,14 @@ namespace SC
             }
         }
 
-        private void StartDialogue()
+        private void StartDialogue(int newWorldState)
         {
             _chainIndex = 0;
             TextBox.text = "";
             IsPlayingDialogue = true;
             DialogueParent.SetActive(true);
             OnDialogueStart?.Invoke(this, null);
+            if(newWorldState != -1) GameManager.Instance.AdvanceWorldState(newWorldState);
             Next();
         }
 

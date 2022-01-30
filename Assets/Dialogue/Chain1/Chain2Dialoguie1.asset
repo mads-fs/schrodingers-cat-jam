@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac78960e86f91dd4ea875eb2597fdc30, type: 3}
-  m_Name: Chain2Dialogue3
+  m_Name: Chain2Dialoguie1
   m_EditorClassIdentifier: 
-  Content: You can leave this place, there is a hole, high upon the wall, hidden
-    behind The Silent One.
+  Content: I do not feel the warmth from the Portal yet. I once heard the provider
+    call it the "Win-dove". Please let in the light.

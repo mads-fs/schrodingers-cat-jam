@@ -50,6 +50,7 @@ namespace SC
 
         private Coroutine _cameraMoveHandle;
         private bool _playerIsTransitioning = false;
+        private List<Interactable> _interactables;
 
         #region Singleton
         public static GameManager Instance;
@@ -100,6 +101,7 @@ namespace SC
                 Instance._camBoxFOV = 5f;
                 Instance._camBoxPosition = FindObjectsOfType<GameObject>().First(pred => pred.name == "Box").transform.position;
                 Instance._camBoxPosition = new Vector3(Instance._camBoxPosition.x, Instance._camBoxPosition.y, _camDefaultPosition.z);
+                Instance._interactables = FindObjectsOfType<Interactable>().Where(pred => pred.name != "Box" && pred.name != "SpiritCat").ToList();
 
                 SubscribeToPlayer();
                 SubscribeToDialogueManager();
@@ -123,7 +125,7 @@ namespace SC
             SpiritCat.SetActive(false);
         }
 
-        public void AdvanceWorldState() => Instance.WorldState += 1;
+        public void AdvanceWorldState(int newState) => Instance.WorldState = newState;
 
         public void LoadScene(int index) => SceneManager.LoadScene(index);
 
@@ -132,6 +134,14 @@ namespace SC
             SideWindowDrapes.sprite = RippedCurtains;
             Instantiate(RipCurtainsAudioPrefab, Vector3.zero, Quaternion.identity);
             SideWindowLight.SetActive(true);
+        }
+
+        public void ToggleInteractables(bool newState)
+        {
+            foreach (Interactable interactable in Instance._interactables)
+            {
+                interactable.gameObject.GetComponent<BoxCollider2D>().enabled = newState;
+            }
         }
 
         #region OneShotAudio
@@ -243,6 +253,7 @@ namespace SC
             crossFade.Play();
             crossFade.Fade();
             ShowLivingRealm();
+            ToggleInteractables(true);
             yield return new WaitForSeconds(2f);
 
             while (time < Instance.CameraLerpTime)
@@ -325,6 +336,7 @@ namespace SC
             crossFade.Play();
             crossFade.Fade();
             ShowSpiritRealm();
+            ToggleInteractables(false);
             yield return new WaitForSeconds(2f);
 
             while (time < Instance.CameraLerpTime)

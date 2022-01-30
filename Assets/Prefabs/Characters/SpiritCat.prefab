@@ -75,6 +75,10 @@ MonoBehaviour:
   Dialogues:
   - WorldStateTrigger: 0
     Chain: {fileID: 11400000, guid: 7bf362e41389e4f489d732f879eeed51, type: 2}
+  - WorldStateTrigger: 1
+    Chain: {fileID: 11400000, guid: 2780124a32f88c34f92e3c69295c3722, type: 2}
+  - WorldStateTrigger: 2
+    Chain: {fileID: 11400000, guid: 9fbf8ca3b909f63458754107038d6840, type: 2}
 --- !u!114 &1407931083
 MonoBehaviour:
   m_ObjectHideFlags: 0

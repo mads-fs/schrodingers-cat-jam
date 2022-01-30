@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac78960e86f91dd4ea875eb2597fdc30, type: 3}
-  m_Name: Chain1Dialogue4
+  m_Name: Chain3Dialogue2
   m_EditorClassIdentifier: 
-  Content: The way is only open when the Provider is present, and they will never
-    allow you to exit.
+  Content: I shall stretch here and partake in a nap, but first, I will hold up my
+    end of the bargain.

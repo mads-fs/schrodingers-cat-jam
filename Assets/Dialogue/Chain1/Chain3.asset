@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d0ec182e74ca44ca91a8b31d7c856f, type: 3}
+  m_Name: Chain3
+  m_EditorClassIdentifier: 
+  NewWorldState: 2
+  DialogueList:
+  - {fileID: 11400000, guid: 0c2dccb90561723419c6489b20a01400, type: 2}
+  - {fileID: 11400000, guid: df2a0c0df080e354a86866eee6e33cfd, type: 2}
+  - {fileID: 11400000, guid: 8865ae8829e513b488fe09e2cc397f38, type: 2}
+  - {fileID: 11400000, guid: 0dbe3c0df92ea3f4bb5c4bd063c200c5, type: 2}
+  - {fileID: 11400000, guid: 51698b60dfabcf84eb14e3f681466fd7, type: 2}
+  - {fileID: 11400000, guid: 23f0f929cdb8baa49bbb5730b29efcbb, type: 2}

@@ -13,6 +13,7 @@ namespace SC
         public event EventHandler OnAlived;
         public event EventHandler OnUnalived;
 
+        public GameObject ButtonPromptEPrefab;
         [Space(10), Header("Physics")]
         [Tooltip("How close to the ground must the player be to be considered grounded.")]
         public float minGroundNormalY = 0.65f;
@@ -34,7 +35,7 @@ namespace SC
         [Header("Debug - Read Only")]
         public bool CanMove = true;
         public bool CanInteract = true;
-        public bool isGrounded;
+        public bool IsGrounded;
         [SerializeField]
         private Vector2 _targetVelocity;
         private Vector2 _groundNormal;
@@ -73,7 +74,18 @@ namespace SC
         private void Update()
         {
             _targetVelocity = Vector2.zero;
-            if (CanInteract == true && isGrounded == true && Input.GetKeyDown(KeyCode.E)) Interact();
+            if (CanInteract == true && IsGrounded == true)
+            {
+                if (@VisionManager.CurrentlySeen.Count > 0)
+                {
+                    ButtonPromptEPrefab.SetActive(true);
+                }
+                else
+                {
+                    ButtonPromptEPrefab.SetActive(false);
+                }
+            }
+            if (CanInteract == true && IsGrounded == true && Input.GetKeyDown(KeyCode.E)) Interact();
             ComputeVelocity();
         }
 
@@ -116,7 +128,7 @@ namespace SC
             if (CanMove)
             {
                 move.x = Input.GetAxis("Horizontal");
-                if (Input.GetButtonDown("Jump") && isGrounded)
+                if (Input.GetButtonDown("Jump") && IsGrounded)
                 {
                     if (Input.GetAxis("Vertical") < 0)
                     {
@@ -142,8 +154,8 @@ namespace SC
             if (move.x > 0.01f) Renderer.flipX = false;
             if (move.x < -0.01f) Renderer.flipX = true;
 
-            CatAnimator.SetBool("Grounded", isGrounded);
-            if (isGrounded)
+            CatAnimator.SetBool("Grounded", IsGrounded);
+            if (IsGrounded)
             {
                 CatAnimator.SetBool("Walking", _velocity.x > 0f || _velocity.x < 0f);
             }
@@ -156,7 +168,7 @@ namespace SC
             _velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
             _velocity.x = _targetVelocity.x;
 
-            isGrounded = false;
+            IsGrounded = false;
             Vector2 deltaPosition = _velocity * Time.deltaTime;
             Vector2 moveAlongGround = new Vector2(_groundNormal.y, -_groundNormal.x);
             Vector2 move = moveAlongGround * deltaPosition.x;
@@ -184,7 +196,7 @@ namespace SC
 
         private void AnimationEventListener_OnBroadcastEvent(object sender, string e)
         {
-            if(FindObjectOfType<DialogueManager>().IsPlayingDialogue == false)
+            if (FindObjectOfType<DialogueManager>().IsPlayingDialogue == false)
             {
                 CanMove = true;
                 CanInteract = true;
@@ -204,7 +216,7 @@ namespace SC
                     Vector2 currentNormal = _hitBufferList[index].normal;
                     if (currentNormal.y > minGroundNormalY)
                     {
-                        isGrounded = true;
+                        IsGrounded = true;
                         if (yMovement)
                         {
                             _groundNormal = currentNormal;
