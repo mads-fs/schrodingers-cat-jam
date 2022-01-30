@@ -90,8 +90,7 @@ namespace SC
                 Instance._camSpiritCatPosition = new Vector3(Instance._camSpiritCatPosition.x, Instance._camSpiritCatPosition.y + 2f, _camDefaultPosition.z);
                 Instance._camBoxFOV = 5f;
                 Instance._camBoxPosition = FindObjectsOfType<GameObject>().First(pred => pred.name == "Box").transform.position;
-                // adjust for pivot location
-                Instance._camBoxPosition = new Vector3(Instance._camBoxPosition.x, Instance._camBoxPosition.y, _camDefaultPosition.z);
+                Instance._camBoxPosition = new Vector3(Instance._camBoxPosition.x, Instance._camBoxPosition.y + 0.25f, _camDefaultPosition.z);
 
                 SubscribeToPlayer();
                 SubscribeToDialogueManager();
@@ -318,8 +317,6 @@ namespace SC
         private void ShowSpiritRealm()
         {
             GlobalVolume.profile = SpiritWorldProfile;
-            SpiritCat.GetComponentInChildren<SpriteRenderer>().color 
-                = new Color(Random.Range(0, 255), Random.Range(0, 255), Random.Range(0, 255), 0.5f);
             SpiritCat.SetActive(true);
         }
 
